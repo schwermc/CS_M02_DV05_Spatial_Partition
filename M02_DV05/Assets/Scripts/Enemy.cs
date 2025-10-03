@@ -2,45 +2,29 @@ using UnityEngine;
 
 namespace SpatialPartitionPattern
 {
-    //The enemy cube being chased by the spheres
     public class Enemy : Soldier
     {
-        //The position the soldier is heading for when moving
         Vector3 currentTarget;
-        //The position the soldier had before it moved, so we can see if it should change cell
         Vector3 oldPos;
-        //The width of the map to generate random coordinated within the map
         float mapWidth;
-        //The grid
         Grid grid;
 
-
-        //Init enemy
         public Enemy(GameObject soldierObj, float mapWidth, Grid grid)
         {
-            //Save what we need to save
             this.soldierTrans = soldierObj.transform;
-
             this.soldierMeshRenderer = soldierObj.GetComponent<MeshRenderer>();
-
             this.mapWidth = mapWidth;
-
             this.grid = grid;
 
             //Add this unit to the grid
             grid.Add(this);
-
-            //Init the old pos
             oldPos = soldierTrans.position;
-
             this.walkSpeed = 5f;
 
             //Give it a random coordinate to move towards
             GetNewTarget();
         }
 
-
-        //Move the cube randomly across the map
         public override void Move()
         {            
             //Move towards the target
